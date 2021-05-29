@@ -56,7 +56,7 @@
     <el-button style="margin: 10px 0px" @click="show = !show" type="success" size="mini">添加</el-button>
     <el-collapse-transition name="el-zoom-in-center">
       <div v-show="show" class="transition-box">
-        <el-form hide-required-asterisk :rules="rules" ref="userForm" :model="form" label-suffix=":" label-width="80px">
+        <el-form :hide-required-asterisk="false" :rules="rules" ref="userForm" :model="form" label-suffix=":" label-width="80px">
           <el-form-item label="姓名" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
