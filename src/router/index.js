@@ -5,6 +5,7 @@ import ButtonDetail from '../components/ButtonDetail'
 import Link from '../components/Link'
 import Tree from '../components/Tree'
 import Layout from '../components/Layout'
+import Index from '../components/Index'
 
 Vue.use(Router)
 
@@ -29,6 +30,14 @@ export default new Router({
     {
       path: '/layout',
       component: Layout
+    },
+    {
+      path: '/index',
+      component: Index
+    },
+    {
+      path: '/',
+      redirect: '/index'
     }
   ]
 })
