@@ -6,6 +6,7 @@ import Link from '../components/Link'
 import Tree from '../components/Tree'
 import Layout from '../components/Layout'
 import Index from '../components/Index'
+import List from '../components/user/List'
 
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ export default new Router({
     {
       path: '/',
       redirect: '/index'
+    },
+    {
+      path: '/userList',
+      component: List
     }
   ]
 })
