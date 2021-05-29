@@ -1,15 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Button from '../components/Button'
+import ButtonDetail from '../components/ButtonDetail'
+import Link from '../components/Link'
+import Tree from '../components/Tree'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/button',
+      component: Button
+    },
+    {
+      path: '/buttonDetail',
+      component: ButtonDetail
+    },
+    {
+      path: '/link',
+      component: Link
+    },
+    {
+      path: '/tree',
+      component: Tree
     }
   ]
 })

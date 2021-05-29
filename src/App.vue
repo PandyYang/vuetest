@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <a href="#/button">点我显示button</a>
+    <a href="#/buttonDetail">按钮组件的详细使用</a>
+    <a href="#/link">文字链接的使用</a>
+    <a href="#/tree">树形控件</a>
+    <br>
+    <br>
     <router-view/>
   </div>
 </template>
@@ -12,12 +17,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
