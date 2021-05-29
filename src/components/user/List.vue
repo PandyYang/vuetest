@@ -56,11 +56,11 @@
     <el-button style="margin: 10px 0px" @click="show = !show" type="success" size="mini">添加</el-button>
     <el-collapse-transition name="el-zoom-in-center">
       <div v-show="show" class="transition-box">
-        <el-form ref="form" :model="form" label-suffix=":" label-width="80px">
-          <el-form-item label="姓名">
+        <el-form hide-required-asterisk :rules="rules" ref="userForm" :model="form" label-suffix=":" label-width="80px">
+          <el-form-item label="姓名" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="生日">
+          <el-form-item label="生日" prop="bir">
             <el-col>
               <el-date-picker
                 type="date"
@@ -70,17 +70,17 @@
                 style="width: 100%;"></el-date-picker>
             </el-col>
           </el-form-item>
-          <el-form-item label="性别">
+          <el-form-item label="性别" prop="sex">
             <el-radio-group v-model="form.sex">
               <el-radio label="男"></el-radio>
               <el-radio label="女"></el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="信息地址">
+          <el-form-item label="信息地址" prop="address">
             <el-input type="textarea" v-model="form.address"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">创建用户</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">创建用户</el-button>
             <el-button>取消</el-button>
           </el-form-item>
         </el-form>
@@ -102,6 +102,18 @@ export default {
         bir: '',
         sex: '男',
         address: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: '请输入用户姓名', trigger: 'blur' }
+          // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        ],
+        bir: [
+          { required: true, message: '请选择用户生日', trigger: 'blur' }
+        ],
+        address: [
+          { required: true, message: '请输入用户地址', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -120,21 +132,28 @@ export default {
         this.tableData = res.data
       })
     },
-    onSubmit () {
-      this.$http.post('http://localhost:8084/user/save', this.form).then(res => {
-        if (res.data.status) {
-          this.$message({
-            message: '添加成功',
-            type: 'success'
+    onSubmit (userForm) {
+      this.$refs['userForm'].validate((valid) => {
+        if (valid) {
+          this.$http.post('http://localhost:8084/user/save', this.form).then(res => {
+            if (res.data.status) {
+              this.$message({
+                message: '添加成功',
+                type: 'success'
+              })
+              this.form = {}
+              this.show = false
+              this.findAllTableData()
+            } else {
+              this.$message({
+                message: '添加失败',
+                type: 'error'
+              })
+            }
           })
-          this.form = {}
-          this.show = false
-          this.findAllTableData()
         } else {
-          this.$message({
-            message: '添加失败',
-            type: 'error'
-          })
+          this.$message.error('表单信息有误')
+          return false
         }
       })
     }
