@@ -4,6 +4,7 @@ import Button from '../components/Button'
 import ButtonDetail from '../components/ButtonDetail'
 import Link from '../components/Link'
 import Tree from '../components/Tree'
+import Layout from '../components/Layout'
 
 Vue.use(Router)
 
@@ -24,6 +25,10 @@ export default new Router({
     {
       path: '/tree',
       component: Tree
+    },
+    {
+      path: '/layout',
+      component: Layout
     }
   ]
 })
