@@ -53,6 +53,19 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-row>
+      <el-col :span="10" :offset="14">
+        <el-pagination
+          layout="prev, pager, next, total, sizes"
+          :page-size="pageSize"
+          :current-page="currentPage"
+          :page-sizes="[2,4,6,8,10]"
+          @current-change="findPage"
+          @size-change="findSize"
+          :total="totalPage">
+        </el-pagination>
+      </el-col>
+    </el-row>
     <el-button style="margin: 10px 0px" @click="show = !show" type="success" size="mini">添加</el-button>
     <el-collapse-transition name="el-zoom-in-center">
       <div v-show="show" class="transition-box">
@@ -103,6 +116,9 @@ export default {
         sex: '男',
         address: ''
       },
+      pageSize: 4,
+      currentPage: 1,
+      totalPage: 0,
       rules: {
         name: [
           { required: true, message: '请输入用户姓名', trigger: 'blur' }
@@ -121,15 +137,26 @@ export default {
     this.findAllTableData()
   },
   methods: {
+    // 处理分页的方法
+    findPage (currentPage) {
+      this.findAllTableData(currentPage, this.pageSize)
+    },
+    findSize (pageSize) {
+      this.findAllTableData(this.currentPage, pageSize)
+    },
     handleEdit (index, row) {
       console.log(index, row)
     },
     handleDelete (index, row) {
       console.log(index, row)
     },
-    findAllTableData () {
-      this.$http.get('http://localhost:8084/user/findAll').then(res => {
+    findAllTableData (currentPage, pageSize) {
+      currentPage = currentPage || this.currentPage
+      pageSize = pageSize || this.pageSize
+      this.$http.get('http://localhost:8084/user/findAll?pageSize=' + currentPage + '&pageSize=' + pageSize).then(res => {
         this.tableData = res.data
+        // this.tableData = res.data.data
+        // this.totalPage = res.data.total
       })
     },
     onSubmit (userForm) {
