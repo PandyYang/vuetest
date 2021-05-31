@@ -7,11 +7,15 @@
         <th>补丁</th>
       </tr>
       <tr v-for="item in tableData" :key="item.id">
-        <td>测试</td>
-        <td>{{item.versionNum}}</td>
+        <td>V01R</td>
+        <td @click="clickthere(item.id)">{{item.versionNum}}</td>
         <td>
-          <table v-for="index in item.children" :key="index.id">
-            {{index.name}}
+          <table style="width: 100%" v-if="item.children.length > 0" >
+            <tr v-for="index in item.children" :key="index.id">
+              <td @click="clickthere(index.id)">
+                {{index.name}}
+              </td>
+            </tr>
           </table>
         </td>
       </tr>
@@ -60,7 +64,35 @@ export default {
         'patchType': null,
         'patchNo': null,
         'refVersion': null,
-        'children': [],
+        'children': [
+          {
+            'id': 262,
+            'names': '',
+            'versionNum': '测试补丁版本啊',
+            'description': '',
+            'creatorName': '杨攀迪',
+            'createdAt': '2021-05-27 17:44:43',
+            'updatedAt': '2021-05-27 17:44:43',
+            'deletedAt': null,
+            'type': 7,
+            'versionCategory': 'patch',
+            'releaseTime': '2021-05-05 00:00:00',
+            'versionStage': 'TEST',
+            'customerId': null,
+            'customerName': null,
+            'productNameEn': null,
+            'moduleNameEn': null,
+            'v': '01',
+            'r': '22',
+            'f': '000',
+            'c': '00',
+            'patchType': 'hp',
+            'patchNo': '123',
+            'refVersion': 259,
+            'children': [],
+            'name': 'V01R22F000C00'
+          }
+        ],
         'name': 'V01R02F000C00'
       },
       {
@@ -250,7 +282,35 @@ export default {
         'patchType': null,
         'patchNo': null,
         'refVersion': 246,
-        'children': [],
+        'children': [
+          {
+            'id': 262,
+            'names': '',
+            'versionNum': '测试补丁版本啊',
+            'description': '',
+            'creatorName': '杨攀迪',
+            'createdAt': '2021-05-27 17:44:43',
+            'updatedAt': '2021-05-27 17:44:43',
+            'deletedAt': null,
+            'type': 7,
+            'versionCategory': 'patch',
+            'releaseTime': '2021-05-05 00:00:00',
+            'versionStage': 'TEST',
+            'customerId': null,
+            'customerName': null,
+            'productNameEn': null,
+            'moduleNameEn': null,
+            'v': '01',
+            'r': '22',
+            'f': '000',
+            'c': '00',
+            'patchType': 'hp',
+            'patchNo': '123',
+            'refVersion': 259,
+            'children': [],
+            'name': 'V01R22F000C00'
+          }
+        ],
         'name': 'V00R66F122C00'
       },
       {
@@ -281,6 +341,11 @@ export default {
         'name': 'V01R22F124C00'
       }
     ]
+  },
+  methods: {
+    clickthere: function (value) {
+      console.log(value)
+    }
   }
 }
 </script>
