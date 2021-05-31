@@ -351,5 +351,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
 </style>
