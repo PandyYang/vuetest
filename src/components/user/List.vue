@@ -139,9 +139,11 @@ export default {
   methods: {
     // 处理分页的方法
     findPage (currentPage) {
+      this.currentPage = currentPage
       this.findAllTableData(currentPage, this.pageSize)
     },
     findSize (pageSize) {
+      this.pageSize = pageSize
       this.findAllTableData(this.currentPage, pageSize)
     },
     handleEdit (index, row) {
