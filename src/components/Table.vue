@@ -1,16 +1,16 @@
 <template>
   <div style="width: 80%">
-    <table border="1" style="width: 100%;">
+    <table border="1px solid #ccc" cellspacing="0" cellpadding="0" style="width: 100%;">
       <tr>
         <th>主线</th>
         <th>版本名称</th>
         <th>补丁</th>
       </tr>
-      <tr v-for="item in tableData" :key="item.id">
-        <td>V01R</td>
+      <tr v-for="(item, index) in tableData" :key="item.id">
+        <td v-if="index===0" :rowspan="tableData.length">V01R</td>
         <td @click="clickthere(item.id)">{{item.versionNum}}</td>
         <td>
-          <table style="width: 100%" v-if="item.children.length > 0" >
+          <table border="1" cellspacing="0" cellpadding="0" style="width: 100%; border-collapse: collapse;" class="table" v-if="item.children.length > 0" >
             <tr v-for="index in item.children" :key="index.id">
               <td @click="clickthere(index.id)">
                 {{index.name}}
